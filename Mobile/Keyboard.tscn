@@ -1,0 +1,985 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://Mobile/Layout.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Circle.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Cross.png" type="Texture" id=3]
+[ext_resource path="res://Mobile/Keyboard.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Oxanium-Regular.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://addons/LANNetwork/broadcaster/broadcaster.gd" type="Script" id=6]
+[ext_resource path="res://addons/LANNetwork/server/server.gd" type="Script" id=7]
+[ext_resource path="res://Assets/Return.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Numbers.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Control.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Shift.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Start.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Alternative.png" type="Texture" id=13]
+
+[sub_resource type="Animation" id=3]
+resource_name = "Error"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Reset"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="DynamicFont" id=6]
+size = 24
+font_data = ExtResource( 5 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 75.6
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0, 0 ), 0.0, 0.976731, 0, 0, Vector2( 1, 1 ), 1.0, 0.0, 0, 0 ]
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[node name="Keyboard" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -2.0
+margin_top = -2.0
+margin_right = -2.0
+margin_bottom = -2.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Layout" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -0.529724
+margin_bottom = -0.529724
+mouse_filter = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Square" type="Control" parent="Layout"]
+margin_left = 300.0
+margin_right = 840.0
+margin_bottom = 540.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Scaling" type="Control" parent="Layout/Square"]
+anchor_left = -0.2
+anchor_top = -0.2
+anchor_right = 1.2
+anchor_bottom = 1.2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cross" type="Control" parent="Layout/Square/Scaling"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Circle" type="TextureRect" parent="Layout/Square/Scaling/Cross"]
+anchor_left = 0.4
+anchor_top = 0.4
+anchor_right = 0.6
+anchor_bottom = 0.6
+mouse_filter = 2
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cross" type="Control" parent="Layout/Square/Scaling/Cross"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopLeft" type="TextureRect" parent="Layout/Square/Scaling/Cross/Cross"]
+anchor_left = 0.255
+anchor_top = 0.255
+anchor_right = 0.455
+anchor_bottom = 0.455
+mouse_filter = 2
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopRight" type="TextureRect" parent="Layout/Square/Scaling/Cross/Cross"]
+anchor_left = 0.545
+anchor_top = 0.255
+anchor_right = 0.745
+anchor_bottom = 0.455
+mouse_filter = 2
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+flip_h = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomLeft" type="TextureRect" parent="Layout/Square/Scaling/Cross/Cross"]
+anchor_left = 0.255
+anchor_top = 0.545
+anchor_right = 0.455
+anchor_bottom = 0.745
+mouse_filter = 2
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+flip_v = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomRight" type="TextureRect" parent="Layout/Square/Scaling/Cross/Cross"]
+anchor_left = 0.545
+anchor_top = 0.545
+anchor_right = 0.745
+anchor_bottom = 0.745
+mouse_filter = 2
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+flip_h = true
+flip_v = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Animation" type="AnimationPlayer" parent="Layout/Square/Scaling/Cross"]
+anims/Error = SubResource( 3 )
+anims/Reset = SubResource( 4 )
+
+[node name="Keys" type="Control" parent="Layout/Square/Scaling/Cross"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopLeft" type="Control" parent="Layout/Square/Scaling/Cross/Keys"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CC" type="Control" parent="Layout/Square/Scaling/Cross/Keys/TopLeft"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="Label" parent="Layout/Square/Scaling/Cross/Keys/TopLeft/CC"]
+anchor_left = 0.42
+anchor_top = 0.38
+anchor_right = 0.42
+anchor_bottom = 0.38
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="2" type="Label" parent="Layout/Square/Scaling/Cross/Keys/TopLeft/CC"]
+anchor_left = 0.38
+anchor_top = 0.34
+anchor_right = 0.38
+anchor_bottom = 0.34
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+
+[node name="3" type="Label" parent="Layout/Square/Scaling/Cross/Keys/TopLeft/CC"]
+anchor_left = 0.34
+anchor_top = 0.3
+anchor_right = 0.34
+anchor_bottom = 0.3
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+
+[node name="4" type="Label" parent="Layout/Square/Scaling/Cross/Keys/TopLeft/CC"]
+anchor_left = 0.3
+anchor_top = 0.26
+anchor_right = 0.3
+anchor_bottom = 0.26
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+
+[node name="C" type="Control" parent="Layout/Square/Scaling/Cross/Keys/TopLeft"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="Label" parent="Layout/Square/Scaling/Cross/Keys/TopLeft/C"]
+anchor_left = 0.38
+anchor_top = 0.42
+anchor_right = 0.38
+anchor_bottom = 0.42
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="2" type="Label" parent="Layout/Square/Scaling/Cross/Keys/TopLeft/C"]
+anchor_left = 0.34
+anchor_top = 0.38
+anchor_right = 0.34
+anchor_bottom = 0.38
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+
+[node name="3" type="Label" parent="Layout/Square/Scaling/Cross/Keys/TopLeft/C"]
+anchor_left = 0.3
+anchor_top = 0.34
+anchor_right = 0.3
+anchor_bottom = 0.34
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+
+[node name="4" type="Label" parent="Layout/Square/Scaling/Cross/Keys/TopLeft/C"]
+anchor_left = 0.26
+anchor_top = 0.3
+anchor_right = 0.26
+anchor_bottom = 0.3
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+
+[node name="TopRight" type="Control" parent="Layout/Square/Scaling/Cross/Keys"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="CC" type="Control" parent="Layout/Square/Scaling/Cross/Keys/TopRight"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="Label" parent="Layout/Square/Scaling/Cross/Keys/TopRight/CC"]
+anchor_left = 0.62
+anchor_top = 0.42
+anchor_right = 0.62
+anchor_bottom = 0.42
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="2" type="Label" parent="Layout/Square/Scaling/Cross/Keys/TopRight/CC"]
+anchor_left = 0.66
+anchor_top = 0.38
+anchor_right = 0.66
+anchor_bottom = 0.38
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+
+[node name="3" type="Label" parent="Layout/Square/Scaling/Cross/Keys/TopRight/CC"]
+anchor_left = 0.7
+anchor_top = 0.34
+anchor_right = 0.7
+anchor_bottom = 0.34
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+
+[node name="4" type="Label" parent="Layout/Square/Scaling/Cross/Keys/TopRight/CC"]
+anchor_left = 0.74
+anchor_top = 0.3
+anchor_right = 0.74
+anchor_bottom = 0.3
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+
+[node name="C" type="Control" parent="Layout/Square/Scaling/Cross/Keys/TopRight"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="Label" parent="Layout/Square/Scaling/Cross/Keys/TopRight/C"]
+anchor_left = 0.58
+anchor_top = 0.38
+anchor_right = 0.58
+anchor_bottom = 0.38
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="2" type="Label" parent="Layout/Square/Scaling/Cross/Keys/TopRight/C"]
+anchor_left = 0.62
+anchor_top = 0.34
+anchor_right = 0.62
+anchor_bottom = 0.34
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+
+[node name="3" type="Label" parent="Layout/Square/Scaling/Cross/Keys/TopRight/C"]
+anchor_left = 0.66
+anchor_top = 0.3
+anchor_right = 0.66
+anchor_bottom = 0.3
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+
+[node name="4" type="Label" parent="Layout/Square/Scaling/Cross/Keys/TopRight/C"]
+anchor_left = 0.7
+anchor_top = 0.26
+anchor_right = 0.7
+anchor_bottom = 0.26
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+
+[node name="BottomRight" type="Control" parent="Layout/Square/Scaling/Cross/Keys"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="CC" type="Control" parent="Layout/Square/Scaling/Cross/Keys/BottomRight"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="Label" parent="Layout/Square/Scaling/Cross/Keys/BottomRight/CC"]
+anchor_left = 0.58
+anchor_top = 0.62
+anchor_right = 0.58
+anchor_bottom = 0.62
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="2" type="Label" parent="Layout/Square/Scaling/Cross/Keys/BottomRight/CC"]
+anchor_left = 0.62
+anchor_top = 0.66
+anchor_right = 0.62
+anchor_bottom = 0.66
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+
+[node name="3" type="Label" parent="Layout/Square/Scaling/Cross/Keys/BottomRight/CC"]
+anchor_left = 0.66
+anchor_top = 0.7
+anchor_right = 0.66
+anchor_bottom = 0.7
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+
+[node name="4" type="Label" parent="Layout/Square/Scaling/Cross/Keys/BottomRight/CC"]
+anchor_left = 0.7
+anchor_top = 0.74
+anchor_right = 0.7
+anchor_bottom = 0.74
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+
+[node name="C" type="Control" parent="Layout/Square/Scaling/Cross/Keys/BottomRight"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="Label" parent="Layout/Square/Scaling/Cross/Keys/BottomRight/C"]
+anchor_left = 0.62
+anchor_top = 0.58
+anchor_right = 0.62
+anchor_bottom = 0.58
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="2" type="Label" parent="Layout/Square/Scaling/Cross/Keys/BottomRight/C"]
+anchor_left = 0.66
+anchor_top = 0.62
+anchor_right = 0.66
+anchor_bottom = 0.62
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+
+[node name="3" type="Label" parent="Layout/Square/Scaling/Cross/Keys/BottomRight/C"]
+anchor_left = 0.7
+anchor_top = 0.66
+anchor_right = 0.7
+anchor_bottom = 0.66
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+
+[node name="4" type="Label" parent="Layout/Square/Scaling/Cross/Keys/BottomRight/C"]
+anchor_left = 0.74
+anchor_top = 0.7
+anchor_right = 0.74
+anchor_bottom = 0.7
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+
+[node name="BottomLeft" type="Control" parent="Layout/Square/Scaling/Cross/Keys"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="CC" type="Control" parent="Layout/Square/Scaling/Cross/Keys/BottomLeft"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="Label" parent="Layout/Square/Scaling/Cross/Keys/BottomLeft/CC"]
+anchor_left = 0.38
+anchor_top = 0.58
+anchor_right = 0.38
+anchor_bottom = 0.58
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="2" type="Label" parent="Layout/Square/Scaling/Cross/Keys/BottomLeft/CC"]
+anchor_left = 0.34
+anchor_top = 0.62
+anchor_right = 0.34
+anchor_bottom = 0.62
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+
+[node name="3" type="Label" parent="Layout/Square/Scaling/Cross/Keys/BottomLeft/CC"]
+anchor_left = 0.3
+anchor_top = 0.66
+anchor_right = 0.3
+anchor_bottom = 0.66
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+
+[node name="4" type="Label" parent="Layout/Square/Scaling/Cross/Keys/BottomLeft/CC"]
+anchor_left = 0.26
+anchor_top = 0.7
+anchor_right = 0.26
+anchor_bottom = 0.7
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+
+[node name="C" type="Control" parent="Layout/Square/Scaling/Cross/Keys/BottomLeft"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="Label" parent="Layout/Square/Scaling/Cross/Keys/BottomLeft/C"]
+anchor_left = 0.42
+anchor_top = 0.62
+anchor_right = 0.42
+anchor_bottom = 0.62
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="2" type="Label" parent="Layout/Square/Scaling/Cross/Keys/BottomLeft/C"]
+anchor_left = 0.38
+anchor_top = 0.66
+anchor_right = 0.38
+anchor_bottom = 0.66
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+
+[node name="3" type="Label" parent="Layout/Square/Scaling/Cross/Keys/BottomLeft/C"]
+anchor_left = 0.34
+anchor_top = 0.7
+anchor_right = 0.34
+anchor_bottom = 0.7
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+
+[node name="4" type="Label" parent="Layout/Square/Scaling/Cross/Keys/BottomLeft/C"]
+anchor_left = 0.3
+anchor_top = 0.74
+anchor_right = 0.3
+anchor_bottom = 0.74
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+
+[node name="Collision" type="Control" parent="Layout/Square/Scaling"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Center" type="StaticBody2D" parent="Layout/Square/Scaling/Collision"]
+position = Vector2( 378, 378 )
+
+[node name="Circle" type="CollisionShape2D" parent="Layout/Square/Scaling/Collision/Center"]
+visible = false
+shape = SubResource( 2 )
+
+[node name="TopLeft" type="Line2D" parent="Layout/Square/Scaling/Collision/Center"]
+visible = false
+points = PoolVector2Array( -189, -189, -52.92, -52.92 )
+default_color = Color( 0.4, 0.501961, 1, 0.498039 )
+
+[node name="TopRight" type="Line2D" parent="Layout/Square/Scaling/Collision/Center"]
+visible = false
+points = PoolVector2Array( 189, -189, 52.92, -52.92 )
+default_color = Color( 0.4, 0.501961, 1, 0.498039 )
+
+[node name="BottomRight" type="Line2D" parent="Layout/Square/Scaling/Collision/Center"]
+visible = false
+points = PoolVector2Array( 189, 189, 52.92, 52.92 )
+default_color = Color( 0.4, 0.501961, 1, 0.498039 )
+
+[node name="BottomLeft" type="Line2D" parent="Layout/Square/Scaling/Collision/Center"]
+visible = false
+points = PoolVector2Array( -189, 189, -52.92, 52.92 )
+default_color = Color( 0.4, 0.501961, 1, 0.498039 )
+
+[node name="FingerLine" type="Line2D" parent="Layout/Square/Scaling/Collision/Center"]
+width_curve = SubResource( 5 )
+default_color = Color( 1, 1, 0, 1 )
+
+[node name="Return" type="TextureRect" parent="Layout/Square/Scaling"]
+anchor_left = 0.73
+anchor_top = 0.46
+anchor_right = 0.81
+anchor_bottom = 0.54
+mouse_filter = 2
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 6
+
+[node name="Button" type="Button" parent="Layout/Square/Scaling/Return"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
+
+[node name="SwitchKeyboard" type="TextureRect" parent="Layout/Square/Scaling"]
+anchor_left = 0.19
+anchor_top = 0.46
+anchor_right = 0.27
+anchor_bottom = 0.54
+mouse_filter = 2
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="Button" type="Button" parent="Layout/Square/Scaling/SwitchKeyboard"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
+
+[node name="ShiftButton" type="TextureRect" parent="Layout"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = -135.96
+margin_right = 70.48
+margin_bottom = -75.48
+mouse_filter = 0
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Highlight" type="ColorRect" parent="Layout/ShiftButton"]
+visible = false
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 0, 0, 0.498039 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Layout/ShiftButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -0.89093
+margin_bottom = -0.89093
+mouse_filter = 1
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
+toggle_mode = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ControlButton" type="TextureRect" parent="Layout"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = -70.48
+margin_right = 70.48
+margin_bottom = -10.0
+mouse_filter = 0
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Highlight" type="ColorRect" parent="Layout/ControlButton"]
+visible = false
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 0, 0, 0.498039 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Layout/ControlButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -0.89093
+margin_bottom = -0.89093
+mouse_filter = 1
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
+toggle_mode = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ModButton" type="TextureRect" parent="Layout"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 75.48
+margin_top = -70.48
+margin_right = 135.96
+margin_bottom = -10.0
+mouse_filter = 0
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Highlight" type="ColorRect" parent="Layout/ModButton"]
+visible = false
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 0, 0, 0.498039 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Layout/ModButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -0.89093
+margin_bottom = -0.89093
+mouse_filter = 1
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
+toggle_mode = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AlternativeButton" type="TextureRect" parent="Layout"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 140.96
+margin_top = -70.48
+margin_right = 201.44
+margin_bottom = -10.0
+mouse_filter = 0
+texture = ExtResource( 13 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Highlight" type="ColorRect" parent="Layout/AlternativeButton"]
+visible = false
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 0, 0, 0.498039 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Layout/AlternativeButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -0.89093
+margin_bottom = -0.89093
+mouse_filter = 1
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
+toggle_mode = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ServerBroadcaster" type="Node" parent="."]
+script = ExtResource( 6 )
+isActive = true
+
+[node name="NetworkServer" type="Node" parent="."]
+script = ExtResource( 7 )
+port = 42269
+maxConnections = 1
+isActive = true
+
+[connection signal="item_rect_changed" from="Layout" to="Layout" method="update"]
+[connection signal="pressed" from="Layout/Square/Scaling/Return/Button" to="." method="returnPressed"]
+[connection signal="pressed" from="Layout/Square/Scaling/SwitchKeyboard/Button" to="." method="switchKeyboardPressed"]
+[connection signal="pressed" from="Layout/ShiftButton/Button" to="." method="shiftPressed"]
+[connection signal="pressed" from="Layout/ControlButton/Button" to="." method="controlPressed"]
+[connection signal="pressed" from="Layout/ModButton/Button" to="." method="modPressed"]
+[connection signal="pressed" from="Layout/AlternativeButton/Button" to="." method="alternativePressed"]

@@ -1,0 +1,142 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Node",
+"class": "CrossingSegments",
+"language": "GDScript",
+"path": "res://Mobile/CrossingSegments.gd"
+}, {
+"base": "NetworkContainer",
+"class": "NetworkClient",
+"language": "GDScript",
+"path": "res://addons/LANNetwork/client/client.gd"
+}, {
+"base": "Node",
+"class": "NetworkContainer",
+"language": "GDScript",
+"path": "res://addons/LANNetwork/container/container.gd"
+}, {
+"base": "NetworkContainer",
+"class": "NetworkServer",
+"language": "GDScript",
+"path": "res://addons/LANNetwork/server/server.gd"
+}, {
+"base": "NetworkContainer",
+"class": "ServerBroadcaster",
+"language": "GDScript",
+"path": "res://addons/LANNetwork/broadcaster/broadcaster.gd"
+}, {
+"base": "NetworkContainer",
+"class": "ServerListener",
+"language": "GDScript",
+"path": "res://addons/LANNetwork/listener/listener.gd"
+} ]
+_global_script_class_icons={
+"CrossingSegments": "",
+"NetworkClient": "res://addons/LANNetwork/client/client.png",
+"NetworkContainer": "res://addons/LANNetwork/container/container.png",
+"NetworkServer": "res://addons/LANNetwork/server/server.png",
+"ServerBroadcaster": "res://addons/LANNetwork/broadcaster/broadcaster.png",
+"ServerListener": "res://addons/LANNetwork/listener/listener.png"
+}
+
+[application]
+
+config/name="Phone-Keyboard"
+run/main_scene="res://Main.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="phonekeyboard"
+boot_splash/bg_color=Color( 0, 0, 0, 1 )
+config/icon="res://icon.png"
+
+[autoload]
+
+Data="*res://Data.gd"
+GlobalScript="*res://Script.gd"
+
+[display]
+
+window/size/width=1140
+window/size/height=540
+window/stretch/mode="2d"
+window/stretch/aspect="expand"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/LANNetwork/plugin.cfg" )
+
+[input]
+
+ui_accept={
+"deadzone": 0.5,
+"events": [  ]
+}
+ui_select={
+"deadzone": 0.5,
+"events": [  ]
+}
+ui_cancel={
+"deadzone": 0.5,
+"events": [  ]
+}
+ui_focus_next={
+"deadzone": 0.5,
+"events": [  ]
+}
+ui_focus_prev={
+"deadzone": 0.5,
+"events": [  ]
+}
+ui_left={
+"deadzone": 0.5,
+"events": [  ]
+}
+ui_right={
+"deadzone": 0.5,
+"events": [  ]
+}
+ui_up={
+"deadzone": 0.5,
+"events": [  ]
+}
+ui_down={
+"deadzone": 0.5,
+"events": [  ]
+}
+ui_page_up={
+"deadzone": 0.5,
+"events": [  ]
+}
+ui_page_down={
+"deadzone": 0.5,
+"events": [  ]
+}
+ui_home={
+"deadzone": 0.5,
+"events": [  ]
+}
+ui_end={
+"deadzone": 0.5,
+"events": [  ]
+}
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_clear_color=Color( 0, 0, 0, 1 )
+environment/default_environment="res://default_env.tres"
